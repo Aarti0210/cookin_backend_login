@@ -1,4 +1,5 @@
-flask
-flask-cors
-pymysql
-werkzeug
+Flask
+Flask-Cors
+PyMySQL
+python-dotenv
+SQLAlchemy

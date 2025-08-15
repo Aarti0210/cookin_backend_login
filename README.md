@@ -13,8 +13,7 @@
 6. Test endpoints:
    - POST `/signup` — JSON: `{ "name":"Aarti", "email":"aarti@example.com", "password":"pass" }`
    - POST `/login` — JSON: `{ "email":"aarti@example.com", "password":"pass" }`
-   - POST `/send-otp` — JSON: `{  "email":"aarti@example.com"" }`
-   - POST ` /verify-otp` — JSON: `{ "email":"aarti@example.com", "otp": "123456" }`
+   
    
    - POST /send-otp — JSON: { "email": "aarti@example.com" }
    - POST /verify-otp — JSON: { "email": "aarti@example.com", "otp": "123456" }

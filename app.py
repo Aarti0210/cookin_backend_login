@@ -101,6 +101,34 @@ def dbtest():
             conn.close()
         except:
             pass
+@app.route("/send-otp", methods=["POST"])
+def send_otp():
+    data = request.get_json() or {}
+    email = data.get("email")
+    if not email:
+        return jsonify({"error": "Email is required"}), 400
+
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT id FROM users WHERE email=%s", (email,))
+            user = cursor.fetchone()
+    finally:
+        try:
+            conn.close()
+        except:
+            pass
+
+    if not user:
+        return jsonify({"error": "Email not found"}), 404
+
+    otp = str(random.randint(100000, 999999))
+    otp_storage[email] = otp
+
+    if send_email_otp(email, otp):
+        return jsonify({"message": "OTP sent successfully"})
+    else:
+        return jsonify({"error": "Failed to send OTP"}), 500
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT',5000))
